@@ -148,6 +148,10 @@
 
         section.innerHTML = (new Showdown.converter()).makeHtml(markdown);
 
+        // automatically make fragments out of list elements
+        var li = section.querySelectorAll("li")
+        for( var j=0; j<li.length; j++ ) li[j].classList.add("fragment")
+
         if( notes ) {
             section.appendChild( notes );
         }
