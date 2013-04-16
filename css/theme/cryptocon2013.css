@@ -35,6 +35,16 @@ body {
 .reveal.page .slides section table thead { background: rgba(255,255,255,.1); }
 .reveal.page .slides section table tr > td { padding: 0.5em; }
 
+#license {
+  position: absolute;
+  left: 1em;
+  bottom: 2em;
+  color: #999;
+  vertical-align: top;
+}
+#license a { color: #999; }
+#license .license_image, #license .license_text { display: inline-block; }
+
 /*********************************************
  * HEADERS
  *********************************************/
