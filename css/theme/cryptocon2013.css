@@ -1,5 +1,5 @@
-@import url(/lib/css/montserrat_font.css);
-@import url(/lib/css/opensans_font.css);
+@import url(../../lib/css/montserrat_font.css);
+@import url(../../lib/css/opensans_font.css);
 /**
  * Black theme for reveal.js.
  *
@@ -9,7 +9,7 @@
  * GLOBAL STYLES
  *********************************************/
 body {
-  background: #111111 url(/img/bg.png) top left no-repeat scroll;
+  background: #111111 url(../../img/bg.png) top left no-repeat scroll;
   background-size: 60%;
 }
 
