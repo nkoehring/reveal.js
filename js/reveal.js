@@ -73,6 +73,9 @@ var Reveal = (function(){
 			// Transition style
 			transition: 'default', // default/cube/page/concave/zoom/linear/fade/none
 
+			// Transition speed
+			transitionSpeed: 'default', // default/fast/slow
+
 			// Script dependencies to load
 			dependencies: []
 		},
@@ -339,6 +342,8 @@ var Reveal = (function(){
 		if( supports3DTransforms === false ) config.transition = 'linear';
 
 		dom.wrapper.classList.add( config.transition );
+
+		dom.wrapper.setAttribute( 'data-transition-speed', config.transitionSpeed );
 
 		if( dom.controls ) {
 			dom.controls.style.display = ( config.controls && dom.controls ) ? 'block' : 'none';
@@ -1440,13 +1445,14 @@ var Reveal = (function(){
 	 * index will be for this slide rather than the currently
 	 * active one
 	 *
-	 * @return {Object} { h: <int>, v: <int> }
+	 * @return {Object} { h: <int>, v: <int>, f: <int> }
 	 */
 	function getIndices( slide ) {
 
 		// By default, return the current indices
 		var h = indexh,
-			v = indexv;
+			v = indexv,
+			f;
 
 		// If a slide is specified, return the indices of that slide
 		if( slide ) {
@@ -1465,7 +1471,14 @@ var Reveal = (function(){
 			}
 		}
 
-		return { h: h, v: v };
+		if( !slide && currentSlide ) {
+			var visibleFragments = currentSlide.querySelectorAll( '.fragment.visible' );
+			if( visibleFragments.length ) {
+				f = visibleFragments.length;
+			}
+		}
+
+		return { h: h, v: v, f: f };
 
 	}
 
@@ -1622,7 +1635,7 @@ var Reveal = (function(){
 				if( previousSlide ) {
 					indexv = ( previousSlide.querySelectorAll( 'section' ).length + 1 ) || undefined;
 					indexh --;
-					slide();
+					slide( indexh, indexv );
 				}
 			}
 		}
